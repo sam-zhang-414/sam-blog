@@ -8,9 +8,10 @@
 
 ```bash
 npm install
-npm run dev        # http://localhost:3000
+npm run dev:hot    # 本地热更新开发，http://localhost:3000
 npm run build      # 生产构建
-npm start          # 以生产模式启动（默认 3000，可用 PORT 覆盖）
+npm run dev        # 生产模式（build + start；Uppcoder 等托管平台默认跑这个）
+npm start          # 已有构建产物时的生产启动
 ```
 
 需要 Node 20.9+，推荐 22。
@@ -62,6 +63,8 @@ lib/posts.ts       读取与渲染文章
 4. 环境变量：一般不需要；如平台注入 `PORT`，`next start` 会自动读取。
 5. 点 **Deploy**，拿到平台分配的域名后绑定自定义域名即可。
 6. 如果 Build 页有 **Auto deploy / Webhook**，打开它，之后 `git push` 即自动重建；没有就 push 后手动点 Redeploy。
+
+> Uppcoder 的 Next.js 模板默认执行 `npm run dev`。本仓库把 `dev` 定义为 `next build && next start`，所以线上跑的是生产构建；本地热更新请用 `npm run dev:hot`。如果以后平台开放命令配置，直接改成 Build `npm ci && npm run build`、Start `npm start`。
 
 ## 发布流程
 
