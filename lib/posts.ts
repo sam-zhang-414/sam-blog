@@ -61,7 +61,7 @@ export function getPost(slug: string): Post | null {
 }
 
 export function formatDate(date: string): string {
-  const parsed = new Date(`${date}T00:00:00+08:00`);
-  if (Number.isNaN(parsed.getTime())) return date;
-  return parsed.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
+  const matched = date.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!matched) return date;
+  return `${matched[1]}年${Number(matched[2])}月${Number(matched[3])}日`;
 }
